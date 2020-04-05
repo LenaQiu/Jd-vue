@@ -1,25 +1,26 @@
 <template>
   <div class="home">
-    <p>Home</p>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <tool-bar @onChangeFragment="onChangeFragment"></tool-bar>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import ToolBar from '@c/ToolBar.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    ToolBar
+  },
+  methods: {
+    onChangeFragment: function (compoentName) {
+      console.log(compoentName)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '@css/style.scss';
-p {
-  font-size: px2rem(16);
-}
 </style>
