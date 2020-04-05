@@ -77,7 +77,7 @@ export default {
     }
     &-name-h {
       color: $mainColor;
-      }
+    }
   }
 }
 </style>

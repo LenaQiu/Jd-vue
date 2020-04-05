@@ -6,4 +6,8 @@
 
 <style lang="scss" ecoped>
 @import '@css/style.scss';
+#app {
+  height: 100%;
+  font-size: 32px;
+}
 </style>
