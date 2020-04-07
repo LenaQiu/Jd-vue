@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <!-- swiper -->
-    <my-swiper :swiperImgs="swiperImgs" :height="swiperHeight"></my-swiper>
+    <my-swiper :swiperImgs="swiperData"></my-swiper>
     <!-- 520 activity -->
     <activity>
-      <div class="520-activity">
-        <img v-for="item of activityDatas" :key="item.id" :src="item.icon">
+      <div class="activity-520">
+        <img v-for="item of activityData" :key="item.id" :src="item.icon">
       </div>
     </activity>
   </div>
@@ -22,24 +22,35 @@ export default {
   },
   data: function () {
     return {
-      swiperImgs: [],
-      swiperHeight: '184px',
-      activityDatas: []
+      swiperData: [],
+      // swiperHeight: '184px',
+      activityData: []
     }
   },
   methods: {
     initData: function () {
-      this.$http.get('/swiper').then(data => {
-        this.swiperImgs = data.list
-        // console.log(this.swiperImgs)
-      }).catch(err => {
-        console.log(err)
-      })
-      // activityData
-      this.$http.get('/activitys').then(data => {
-        this.activityDatas = data.list
-        console.log(this.activityDatas)
-      }).catch(err => {
+      // this.$http.get('/swiper').then(data => {
+      //   this.swiperImgs = data.list
+      //   // console.log(this.swiperImgs)
+      // }).catch(err => {
+      //   console.log(err)
+      // })
+      // // activityData
+      // this.$http.get('/activitys').then(data => {
+      //   this.activityDatas = data.list
+      //   console.log(this.activityDatas)
+      // }).catch(err => {
+      //   console.log(err)
+      // })
+
+      // axios 同时发送多个请求 （并行）
+      this.$http.all([
+        this.$http.get('/swiper'),
+        this.$http.get('/activitys')
+      ]).then(this.$http.spread((swiperData, activityData) => {
+        this.swiperData = swiperData.list
+        this.activityData = activityData.list
+      })).catch(err => {
         console.log(err)
       })
     }
@@ -55,5 +66,11 @@ export default {
 .home {
   width: 100%;
   height: 100%;
+  .activity-520 {
+    display: flex;
+    img {
+      width: 33.33%;
+    }
+  }
 }
 </style>

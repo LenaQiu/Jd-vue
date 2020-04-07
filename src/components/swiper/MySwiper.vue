@@ -2,7 +2,7 @@
 <!-- 1、swiper; 2、滑动模块； 3、分页器 -->
   <swiper :options="swiperOptions">
     <swiper-slide v-for="item of swiperImgs" :key="item.id">
-      <img :style="{height: height}" :src="item.icon" alt="">
+      <img :src="item.icon" alt="">
     </swiper-slide>
     <template v-slot:pagination>
       <div class="swiper-pagination"></div>
@@ -20,8 +20,7 @@ export default {
     SwiperSlide
   },
   props: {
-    swiperImgs: Array,
-    height: String
+    swiperImgs: Array
   },
   data: function () {
     return {
@@ -48,6 +47,7 @@ export default {
   .swiper-wrapper
     img {
       display: block;
+      width: 100%;
     }
       // 隐藏部分 出错， 页面不渲染一下样式
   .swiper-pagination{
