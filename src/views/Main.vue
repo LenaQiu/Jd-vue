@@ -41,5 +41,10 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  // .tool-bar {
+  //   position: fixed;
+  //   width: 100%;
+  //   bottom: 0;
+  // }
 }
 </style>

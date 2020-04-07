@@ -3,7 +3,7 @@
   <div class="count-down">
     <!-- 整点场 + 倒计时 -->
     <span class="count-down-end-time">{{endHours}}点场</span>
-    <span class="count-down-down-surplus">{{surplus}}</span>
+    <span class="count-down-down-surplus">{{surplus | formatTime}}</span>
   </div>
   <!-- 秒杀倒计时 /-->
 </template>
@@ -91,20 +91,11 @@ export default {
 
     // 监听 diffSeconds 值； newV
     diffSeconds: function (newV) {
-      let hours = Math.floor(newV / 3600)
-      if (hours < 10) {
-        hours = '0' + hours
-      }
+      const hours = Math.floor(newV / 3600)
       // 获取剩余 分钟
-      let minutes = Math.floor((newV % 3600) / 60)
-      if (minutes < 10) {
-        minutes = '0' + minutes
-      }
+      const minutes = Math.floor((newV % 3600) / 60)
       // 获取剩余 秒数
-      let seconds = newV % 60
-      if (seconds < 10) {
-        seconds = '0' + seconds
-      }
+      const seconds = newV % 60
       // 拼装数据
       this.surplus = hours + ':' + minutes + ':' + seconds
     },

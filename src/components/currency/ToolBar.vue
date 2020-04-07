@@ -64,6 +64,7 @@ export default {
   background-color: #fff;
   box-shadow: 0 0 px2rem(16) 0 rgba(0, 0, 0, .2);
   border-top: 1px solid $lineColor;
+  z-index: 999;
   &-item {
     padding: px2rem(4);
     img {

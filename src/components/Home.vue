@@ -12,6 +12,14 @@
     <mode-options></mode-options>
     <!-- 京东秒杀 -->
     <seckill :seckillData="seckillData"></seckill>
+    <!-- 拼购节 -->
+    <activity>
+      <div class="activity-pin-gou-jie">
+        <img src="@images/haoHuoQiang.gif">
+      </div>
+    </activity>
+    <!-- 商品列表 -->
+    <goods></goods>
   </div>
 </template>
 
@@ -20,13 +28,15 @@ import MySwiper from '@c/swiper/MySwiper.vue'
 import Activity from '@c/currency/Activity.vue'
 import ModeOptions from '@c/currency/ModeOptions.vue'
 import Seckill from '@c/seckill/Seckill.vue'
+import Goods from '@c/goods/Goods.vue'
 export default {
   name: 'Home',
   components: {
     MySwiper,
     Activity,
     ModeOptions,
-    Seckill
+    Seckill,
+    Goods
   },
   data: function () {
     return {
@@ -39,20 +49,6 @@ export default {
   },
   methods: {
     initData: function () {
-      // this.$http.get('/swiper').then(data => {
-      //   this.swiperImgs = data.list
-      //   // console.log(this.swiperImgs)
-      // }).catch(err => {
-      //   console.log(err)
-      // })
-      // // activityData
-      // this.$http.get('/activitys').then(data => {
-      //   this.activityDatas = data.list
-      //   console.log(this.activityDatas)
-      // }).catch(err => {
-      //   console.log(err)
-      // })
-
       // axios 同时发送多个请求 （并行）
       this.$http.all([
         this.$http.get('/swiper'),
@@ -80,10 +76,20 @@ export default {
   width: 100%;
   height: 100%;
   background-color: $bgColor;
+  overflow-y: auto;
   .activity-520 {
     display: flex;
     img {
       width: 33.33%;
+    }
+  }
+  .activity-pin-gou-jie {
+    margin-top: px2rem(8);
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    img {
+      width: 100%
     }
   }
 }

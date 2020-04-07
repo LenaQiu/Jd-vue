@@ -4,7 +4,7 @@
     <!-- 标题 -->
     <h2 class="seckill-title">京东秒杀</h2>
     <!-- 秒杀倒计时 -->
-    <count-down :endHours="23"></count-down>
+    <count-down :endHours="1"></count-down>
     <!-- 秒杀内容 -->
     <ul class="seckill-content">
       <li
