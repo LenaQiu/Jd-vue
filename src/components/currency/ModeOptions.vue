@@ -59,9 +59,6 @@ export default {
         titel: '全球购'
       }]
     }
-  },
-  mounted () {
-    console.log(this.dataSource)
   }
 }
 </script>
@@ -70,12 +67,15 @@ export default {
 @import '@css/style.scss';
 .mode-options {
   position: relative;
+  margin-top: px2rem(6);
+  background-color: #fff;
+  border-top-left-radius: px2rem(8);
+  border-top-right-radius: px2rem(8);
   &-itme {
+    box-sizing: border-box;
     width: 20%;
     display: inline-block;
-    margin-top: px2rem(8);
-    box-sizing: border-box;
-    padding: 2px;
+    padding: px2rem(6)px2rem(4);
     text-align: center;
     &-icon {
       width: 80%;

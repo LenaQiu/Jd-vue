@@ -8,7 +8,10 @@
         <img v-for="item of activityData" :key="item.id" :src="item.icon">
       </div>
     </activity>
+    <!-- 京东服务选项 -->
     <mode-options></mode-options>
+    <!-- 京东秒杀 -->
+    <seckill :seckillData="seckillData"></seckill>
   </div>
 </template>
 
@@ -16,18 +19,22 @@
 import MySwiper from '@c/swiper/MySwiper.vue'
 import Activity from '@c/currency/Activity.vue'
 import ModeOptions from '@c/currency/ModeOptions.vue'
+import Seckill from '@c/seckill/Seckill.vue'
 export default {
   name: 'Home',
   components: {
     MySwiper,
     Activity,
-    ModeOptions
+    ModeOptions,
+    Seckill
   },
   data: function () {
     return {
       swiperData: [],
       // swiperHeight: '184px',
-      activityData: []
+      activityData: [],
+      // 秒杀数据
+      seckillData: []
     }
   },
   methods: {
@@ -49,10 +56,13 @@ export default {
       // axios 同时发送多个请求 （并行）
       this.$http.all([
         this.$http.get('/swiper'),
-        this.$http.get('/activitys')
-      ]).then(this.$http.spread((swiperData, activityData) => {
+        this.$http.get('/activitys'),
+        this.$http.get('/seconds')
+      ]).then(this.$http.spread((swiperData, activityData, seckillData) => {
         this.swiperData = swiperData.list
         this.activityData = activityData.list
+        this.seckillData = seckillData.list
+        // console.log(this.seckillData)
       })).catch(err => {
         console.log(err)
       })
@@ -69,6 +79,7 @@ export default {
 .home {
   width: 100%;
   height: 100%;
+  background-color: $bgColor;
   .activity-520 {
     display: flex;
     img {
