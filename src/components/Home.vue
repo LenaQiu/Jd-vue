@@ -8,17 +8,20 @@
         <img v-for="item of activityData" :key="item.id" :src="item.icon">
       </div>
     </activity>
+    <mode-options></mode-options>
   </div>
 </template>
 
 <script>
 import MySwiper from '@c/swiper/MySwiper.vue'
 import Activity from '@c/currency/Activity.vue'
+import ModeOptions from '@c/currency/ModeOptions.vue'
 export default {
   name: 'Home',
   components: {
     MySwiper,
-    Activity
+    Activity,
+    ModeOptions
   },
   data: function () {
     return {

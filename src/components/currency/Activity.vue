@@ -16,5 +16,7 @@ export default {
 .activity {
   max-height: px2rem(160);
   position: relative;
+  height: 0;
+  padding-bottom: 26.7%;
 }
 </style>

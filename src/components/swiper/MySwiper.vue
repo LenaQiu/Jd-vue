@@ -44,6 +44,8 @@ export default {
 <style lang="scss"  scoped>
 @import '@css/style.scss';
 .swiper-container {
+  height: 0;
+  padding-bottom: 48.9%;
   .swiper-wrapper
     img {
       display: block;
