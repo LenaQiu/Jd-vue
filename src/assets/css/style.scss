@@ -10,3 +10,21 @@
   -webkit-box-orient: vertical;
   display: -webkit-box;
 }
+
+.z-index-max {
+  z-index: 999;
+}
+
+.z-index-2 {
+  z-index: 2
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top:px2rem(8) solid $mainColor;
+  border-right: px2rem(8) solid transparent;
+  border-bottom: px2rem(8) solid transparent;
+  border-left: px2rem(8) solid transparent;
+}

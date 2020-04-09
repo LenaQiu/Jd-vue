@@ -1,5 +1,24 @@
 <template>
-  <div class="home">
+  <div class="home" @scroll="onScollChange">
+    <navigation-bar :isShowBack="false" :isShowTitle="false" :navBarStyle="navBarStyle">
+      <!-- 插槽 nav-left -->
+      <template v-slot:nav-left>
+        <img :src="navBarCurrentSlotStyle.leftIcon" alt="">
+      </template>
+      <!-- 插槽 nav-center -->
+      <template v-slot:nav-center>
+        <search
+        :icon="navBarCurrentSlotStyle.search.icon"
+        :bgColor="navBarCurrentSlotStyle.search.bgColor"
+        :hintColor="navBarCurrentSlotStyle.search.hintColor"
+        >
+        </search>
+      </template>
+      <!-- 插槽 nav-right -->
+      <template v-slot:nav-right>
+        <img :src="navBarCurrentSlotStyle.rightIcon" alt="">
+      </template>
+    </navigation-bar>
     <!-- swiper -->
     <my-swiper :swiperImgs="swiperData"></my-swiper>
     <!-- 520 activity -->
@@ -8,7 +27,7 @@
         <img v-for="item of activityData" :key="item.id" :src="item.icon">
       </div>
     </activity>
-    <!-- 京东服务选项 -->
+    <!-- 京东服务功能选项选项 -->
     <mode-options></mode-options>
     <!-- 京东秒杀 -->
     <seckill :seckillData="seckillData"></seckill>
@@ -29,6 +48,8 @@ import Activity from '@c/currency/Activity.vue'
 import ModeOptions from '@c/currency/ModeOptions.vue'
 import Seckill from '@c/seckill/Seckill.vue'
 import Goods from '@c/goods/Goods.vue'
+import NavigationBar from '@c/currency/NavigationBar.vue'
+import Search from '@c/currency/Search.vue'
 export default {
   name: 'Home',
   components: {
@@ -36,15 +57,57 @@ export default {
     Activity,
     ModeOptions,
     Seckill,
-    Goods
+    Goods,
+    NavigationBar,
+    Search
   },
   data: function () {
     return {
+      pageName: '首页',
       swiperData: [],
       // swiperHeight: '184px',
       activityData: [],
       // 秒杀数据
-      seckillData: []
+      seckillData: [],
+      // navBar 插槽的样式数据，包含页面未开始滑动的时候插槽的样式
+      // 和 页面滑动到指定位置 之后的插槽的样式
+      navBarSlotStyle: {
+        // 默认样式
+        normal: {
+          // 左侧插槽
+          leftIcon: require('@images/more-white.svg'),
+          // 中间插槽
+          search: {
+            bgColor: '#fff',
+            hintColor: '#999',
+            icon: require('@images/search.svg')
+          },
+          // 右边
+          rightIcon: require('@images/message-white.svg')
+        },
+        // 高亮样式 （页面滑动到指定位置）
+        heightLight: {
+          // 左侧插槽
+          leftIcon: require('@images/more.svg'),
+          // 中间插槽
+          search: {
+            bgColor: '#d7d7d7',
+            hintColor: '#fff',
+            icon: require('@images/search-white.svg')
+          },
+          // 右边
+          rightIcon: require('@images/message.svg')
+        }
+      },
+      // navBar 当前使用的插槽样式
+      navBarCurrentSlotStyle: {},
+      // navBar 的定制样式
+      navBarStyle: {
+        position: 'fixed',
+        backgroundColor: ''
+      },
+      // 记录页面滚动值
+      scrollTopValue: null
     }
   },
   methods: {
@@ -62,9 +125,25 @@ export default {
       })).catch(err => {
         console.log(err)
       })
+    },
+    /**
+     * home元素 滚动事件处理
+     * 透明度 = 滚动距离 / 指定的距离
+     */
+    onScollChange: function ($e) {
+      this.scrollTopValue = $e.target.scrollTop
+      let opc = this.scrollTopValue / 160
+      opc = opc < 1 ? opc : 1
+      this.navBarStyle.backgroundColor = 'rgba(255, 255, 255, ' + opc + ')'
+      if (opc >= 1) {
+        this.navBarCurrentSlotStyle = this.navBarSlotStyle.heightLight
+      } else {
+        this.navBarCurrentSlotStyle = this.navBarSlotStyle.normal
+      }
     }
   },
   created () {
+    this.navBarCurrentSlotStyle = this.navBarSlotStyle.normal
     this.initData()
   }
 }
@@ -77,6 +156,15 @@ export default {
   height: 100%;
   background-color: $bgColor;
   overflow-y: auto;
+  .navigation-bar {
+    .center .nav-center-search{
+      margin: px2rem(6) 0;
+      width: 100%;
+      height: px2rem(32);
+      background: #fff;
+      border-radius: px2rem(6);
+    }
+  }
   .activity-520 {
     display: flex;
     img {
@@ -89,7 +177,7 @@ export default {
     width: 100%;
     background-color: #fff;
     img {
-      width: 100%
+      width: 100%;
     }
   }
 }

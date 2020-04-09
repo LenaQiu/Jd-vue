@@ -20,8 +20,10 @@
         :style="imgStyles[index]"
       >
       <div class="goods-item-desc">
-        <p class="goods-item-desc-name text-line-2">
+        <p class="goods-item-desc-name text-line-2" :class="{ 'goods-item-desc-name-hint':item.isHave }">
           <!-- 是否 直营 / 是否 有货 -->
+          <direct v-if="item.isDirect"></direct>
+          <no-have v-if="item.isHave"></no-have>
           {{item.name}}
         </p>
         <div class="goods-item-desc-data">
@@ -34,8 +36,14 @@
 </template>
 
 <script>
+import Direct from '@c/goods/Direct.vue'
+import NoHave from '@c/goods/NoHave.vue'
 export default {
   name: 'Goods', // 模版名称
+  components: {
+    Direct,
+    NoHave
+  },
   data () {
     return {
       // 数据源
@@ -54,7 +62,7 @@ export default {
       this.$http.get('/goods')
         .then(data => {
           this.sourceData = data.list
-
+          // console.log(this.sourceData)
           // 获取数据后， 执行 图片样式 事件
           this.initImgStyle()
 
@@ -152,7 +160,7 @@ export default {
       font-size: $infoSize;
       line-height: px2rem(18);
       &-name {
-        font-weight: 600;
+        text-align: left;
       }
       &-data {
         margin-top: px2rem(6);
@@ -165,6 +173,9 @@ export default {
           color: $mainColor;
           font-weight: 500;
         }
+      }
+      .goods-item-desc-name-hint {
+        color: #ccc;
       }
     }
   }

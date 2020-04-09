@@ -1,9 +1,13 @@
 <template>
+  <!--
+    点击功能选项跳转到商品列表
+  -->
   <div class="mode-options">
     <div
       class="mode-options-itme"
       v-for="item of dataSource"
       :key="item.id"
+      @click="handleOptionsClick"
     >
       <img class="mode-options-itme-icon" :src="item.icon">
       <p class="mode-options-itme-title">{{item.titel}}</p>
@@ -58,6 +62,11 @@ export default {
         icon: require('@images/haiTunQuanQiu.png'),
         titel: '全球购'
       }]
+    }
+  },
+  methods: {
+    handleOptionsClick: function () {
+      this.$router.push('/goodslist')
     }
   }
 }

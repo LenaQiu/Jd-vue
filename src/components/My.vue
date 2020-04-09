@@ -1,12 +1,22 @@
 <template>
   <div class="my">
-    <h1>个人中心</h1>
+    <navigation-bar :pageName="pageName"></navigation-bar>
+    <h1></h1>
   </div>
 </template>
 
 <script>
+import NavigationBar from '@c/currency/NavigationBar.vue'
 export default {
-  name: 'My'
+  name: 'My',
+  components: {
+    NavigationBar
+  },
+  data () {
+    return {
+      pageName: '个人中心'
+    }
+  }
 }
 </script>
 
