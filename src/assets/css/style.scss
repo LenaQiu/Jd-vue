@@ -2,6 +2,14 @@
 @import './reset';
 @import './colors.scss';
 
+.text-line-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
 .text-line-2 {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -23,8 +31,8 @@
   display: inline-block;
   width: 0;
   height: 0;
-  border-top:px2rem(8) solid $mainColor;
-  border-right: px2rem(8) solid transparent;
-  border-bottom: px2rem(8) solid transparent;
-  border-left: px2rem(8) solid transparent;
+  border-top:px2rem(6) solid $mainColor;
+  border-right: px2rem(6) solid transparent;
+  border-bottom: px2rem(6) solid transparent;
+  border-left: px2rem(6) solid transparent;
 }

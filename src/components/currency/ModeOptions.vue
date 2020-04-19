@@ -66,7 +66,12 @@ export default {
   },
   methods: {
     handleOptionsClick: function () {
-      this.$router.push('/goodslist')
+      this.$router.push({
+        name: 'GoodsList',
+        params: {
+          routerType: 'push'
+        }
+      })
     }
   }
 }
@@ -92,7 +97,7 @@ export default {
       display: inline-block;
     }
     &-title {
-      font-size: $minifoSize;
+      font-size: $miniSize;
       margin-top: px2rem(4);
     }
   }

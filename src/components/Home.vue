@@ -1,5 +1,5 @@
 <template>
-  <div class="home" @scroll="onScollChange">
+  <div class="home" @scroll="onScollChange" ref="home">
     <navigation-bar :isShowBack="false" :isShowTitle="false" :navBarStyle="navBarStyle">
       <!-- 插槽 nav-left -->
       <template v-slot:nav-left>
@@ -20,7 +20,7 @@
       </template>
     </navigation-bar>
     <!-- swiper -->
-    <my-swiper :swiperImgs="swiperData"></my-swiper>
+    <my-swiper :swiperImgs="swiperImgs"></my-swiper>
     <!-- 520 activity -->
     <activity>
       <div class="activity-520">
@@ -38,7 +38,7 @@
       </div>
     </activity>
     <!-- 商品列表 -->
-    <goods></goods>
+    <goods :layoutType="'2'" :isScroll="false"></goods>
   </div>
 </template>
 
@@ -110,6 +110,11 @@ export default {
       scrollTopValue: null
     }
   },
+  computed: {
+    swiperImgs: function () {
+      return this.swiperData.map(item => item.icon)
+    }
+  },
   methods: {
     initData: function () {
       // axios 同时发送多个请求 （并行）
@@ -145,6 +150,12 @@ export default {
   created () {
     this.navBarCurrentSlotStyle = this.navBarSlotStyle.normal
     this.initData()
+  },
+  /**
+   * 在 keep-alive 激活被执行
+   */
+  activated () {
+    this.$refs.home.scrollTop = this.scrollTopValue
   }
 }
 </script>
@@ -164,6 +175,10 @@ export default {
       background: #fff;
       border-radius: px2rem(6);
     }
+  }
+  .swiper-container {
+    height: 0;
+    padding-bottom: 48.9%;
   }
   .activity-520 {
     display: flex;

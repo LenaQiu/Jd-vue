@@ -19,7 +19,7 @@ export default {
   &-info {
     display: inline-block;
     padding: 0 px2rem(8);
-    font-size: $minifoSize;
+    font-size: $miniSize;
     line-height: px2rem(16);
     color: #fff;
     background: $mainColor;

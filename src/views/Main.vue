@@ -1,7 +1,10 @@
 <template>
   <div class="main">
-    <component :is="currentComponent"></component>
-    <tool-bar @onChangeFragment="onChangeFragment"></tool-bar>
+    <keep-alive>
+      <!-- 动态组件 -->
+      <component :is="currentComponent"></component>
+    </keep-alive>
+    <tool-bar ref="toolBar" @onChangeFragment="onChangeFragment"></tool-bar>
   </div>
 </template>
 
@@ -29,7 +32,21 @@ export default {
   methods: {
     onChangeFragment: function (compoentName) {
       this.currentComponent = compoentName
+    },
+    /**
+     * 指定加载的页面组件
+     */
+    pushFragment: function () {
+      // 获取到组件加载的下标
+      const componentIndex = this.$route.params.componentIndex
+      if (componentIndex === undefined) return
+      // 获取 this.$refs.toolBar 组件的方法
+      this.$refs.toolBar.pushFragment(componentIndex)
     }
+  },
+  activated () {
+    // keep-alive 被激活的时候，调用指定加载页面组件的方法
+    this.pushFragment()
   }
 }
 </script>
@@ -37,14 +54,10 @@ export default {
 <style lang="scss" scoped>
 @import '@css/style.scss';
 .main {
+  position: absolute;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  // .tool-bar {
-  //   position: fixed;
-  //   width: 100%;
-  //   bottom: 0;
-  // }
 }
 </style>

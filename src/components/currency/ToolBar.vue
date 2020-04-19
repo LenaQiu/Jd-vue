@@ -42,6 +42,7 @@ export default {
         name: '我的',
         compoentName: 'my'
       }],
+      // 选中的 tab 按钮
       selectItemIndex: 0
     }
   },
@@ -49,6 +50,9 @@ export default {
     handleToolClick (item, index) {
       this.selectItemIndex = index
       this.$emit('onChangeFragment', item.compoentName)
+    },
+    pushFragment: function (index) {
+      this.handleToolClick(this.toolBarData[index], index)
     }
   }
 }

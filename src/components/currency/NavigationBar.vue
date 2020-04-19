@@ -60,6 +60,7 @@ export default {
 <style lang='scss' scoped>
 @import "@css/style.scss";
 .navigation-bar {
+  position: relative;
   width: 100%;
   height: px2rem(44);
   display: flex;
