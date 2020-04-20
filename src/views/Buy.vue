@@ -34,7 +34,7 @@
         <!-- 支付选项 -->
     </div>
     <!-- 立即购买按钮 -->
-    <div class="buy-btn">立即购买 </div>
+    <div class="submit-btn buy-btn">立即购买 </div>
   </div>
 </template>
 
@@ -172,19 +172,6 @@ export default {
         }
     }
 
-  }
-  .buy-btn {
-    position: absolute;
-    bottom: 10%;
-    width: 80%;
-    margin-left: 10%;
-    text-align: center;
-    display: inline-block;
-    color: #fff;
-    font-size: $titleSize;
-    line-height: px2rem(36);
-    background: $mainColor;
-    border-radius: px2rem(16);
   }
 }
 </style>

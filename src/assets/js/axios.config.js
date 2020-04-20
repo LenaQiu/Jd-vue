@@ -40,7 +40,6 @@ axios.interceptors.request.use(function (config) {
   // config.url = '/api' + config.url;
 
   // 当请求中存在 params 的时候，为 params 新增 token 字段
-  // 同学运行此代码，需要替换 token 为，老师分配的Token。（QQ群:685831117 - @LGD_Sunday）
   if (config.params) {
     config.params.token = 'bf4f7c10-7675-11ea-80c9-8daaf3845cc5'
   } else {
